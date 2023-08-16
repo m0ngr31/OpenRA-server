@@ -1,0 +1,2 @@
+# OpenRA Server
+Placeholder text
