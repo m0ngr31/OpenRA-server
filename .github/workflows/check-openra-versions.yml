@@ -26,7 +26,7 @@ jobs:
 
             data.forEach(release => {
               if (new Date(release.published_at) > fromDate) {
-                needed.push(release.tag_name);
+                needsPublished.push(release.tag_name);
               }
             });
 
@@ -54,4 +54,8 @@ jobs:
                 prerelease: a.startsWith('playtest') ? true : false,
                 make_latest: a.startsWith('release') ? 'true' : 'false',
               });
+            }
+
+            if (needsPublished.length === 0) {
+              console.log('Nothing to do!');
             }
