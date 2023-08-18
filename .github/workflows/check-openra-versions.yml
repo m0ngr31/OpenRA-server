@@ -1,0 +1,57 @@
+name: Check Versions
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        id: check-versions
+        with:
+          result-encoding: string
+          retries: 3
+          script: |
+            let needsPublished = [];
+
+            const fromDate = new Date('2021-02-01');
+
+            const {data} = await github.rest.repos.listReleases({
+              owner: 'OpenRA',
+              repo: 'OpenRA',
+              per_page: 50,
+            });
+
+            data.forEach(release => {
+              if (new Date(release.published_at) > fromDate) {
+                needed.push(release.tag_name);
+              }
+            });
+
+            // Reverse them to go in order of oldest -> newest
+            needsPublished = needsPublished.reverse();
+
+            const {data: dockerData} = await github.rest.repos.listReleases({
+              owner: 'm0ngr31',
+              repo: 'OpenRA-server',
+              per_page: 2000,
+            });
+
+            const published = dockerData.map(p => p.tag_name);
+
+            needsPublished = needsPublished.filter(r => !published.includes(r));
+
+            for (const a of needsPublished) {
+              console.log('Releasing: ', a);
+
+              await github.rest.repos.createRelease({
+                owner: 'm0ngr31',
+                repo: 'OpenRA-server',
+                tag_name: a,
+                name: a,
+                prerelease: a.startsWith('playtest') ? true : false,
+                make_latest: a.startsWith('release') ? 'true' : 'false',
+              });
+            }

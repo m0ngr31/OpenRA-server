@@ -46,7 +46,8 @@ RUN mkdir -p /home/openra/lib/openra; \
 RUN chown -R openra:openra /home/openra/.openra
 
 RUN apt-get purge -y curl make patch unzip; \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* \
+  apt autoremove
 
 EXPOSE 1234
 

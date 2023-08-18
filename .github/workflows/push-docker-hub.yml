@@ -1,14 +1,15 @@
-name: ci
+name: Publish versions
 
 on:
   push:
     tags:
       - '*'
 
+concurrency: ci-m0ngr31-openra
+
 jobs:
   docker:
     runs-on: ubuntu-latest
-    container: catthehacker/ubuntu:act-latest
     steps:
       -
         name: Checkout
