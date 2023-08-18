@@ -69,6 +69,6 @@ LABEL org.opencontainers.image.title="OpenRA dedicated server"
 LABEL org.opencontainers.image.description="Image to run a server instance for OpenRA"
 LABEL org.opencontainers.image.url="https://github.com/m0ngr31/OpenRA-server"
 LABEL org.opencontainers.image.documentation="https://github.com/m0ngr31/OpenRA-server#readme"
-LABEL org.opencontainers.image.version=${OPENRA_RELEASE}
+LABEL org.opencontainers.image.version=${OPENRA_VERSION}
 LABEL org.opencontainers.image.licenses="GPL-3.0"
 LABEL org.opencontainers.image.authors="Joe Ipson"
