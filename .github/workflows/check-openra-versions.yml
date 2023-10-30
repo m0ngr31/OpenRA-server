@@ -11,6 +11,7 @@ jobs:
       - uses: actions/github-script@v6
         id: check-versions
         with:
+          token: ${{ secrets.PAT }}
           result-encoding: string
           retries: 3
           script: |

@@ -1,8 +1,9 @@
 name: Publish versions
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '*'
 
 concurrency: ci-m0ngr31-openra
 
