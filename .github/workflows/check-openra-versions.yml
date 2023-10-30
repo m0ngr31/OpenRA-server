@@ -2,7 +2,7 @@ name: Check Versions
 
 on:
   schedule:
-    - cron: '0 * * * *'  # every day at midnight
+    - cron: '30 * * * *'  # every day at midnight
 
 jobs:
   docker:
