@@ -2,7 +2,7 @@ name: Check Versions
 
 on:
   schedule:
-    - cron: '30 * * * *'  # every day at midnight
+    - cron: '40 * * * *'  # every day at midnight
 
 jobs:
   docker:
@@ -11,7 +11,7 @@ jobs:
       - uses: actions/github-script@v6
         id: check-versions
         with:
-          token: ${{ secrets.PAT }}
+          github-token: ${{ secrets.PAT }}
           result-encoding: string
           retries: 3
           script: |
