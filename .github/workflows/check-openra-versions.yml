@@ -2,7 +2,7 @@ name: Check Versions
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # every day at midnight
+    - cron: '0 * * * *'  # every day at midnight
 
 jobs:
   docker:
@@ -60,3 +60,9 @@ jobs:
             if (needsPublished.length === 0) {
               console.log('Nothing to do!');
             }
+
+            await github.rest.actions.enableWorkflow({
+              owner: 'm0ngr31',
+              repo: 'OpenRA-server',
+              workflow_id: 'check-openra-versions.yml',
+            });
